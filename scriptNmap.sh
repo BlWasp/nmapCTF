@@ -17,3 +17,5 @@ echo $portL
 
 #Second scan to scan with default scans only the open ports
 nmap -p $portL -sC -sV $ip
+
+rm firstScan
