@@ -4,7 +4,7 @@ ip="${1}"
 portL=""
 
 #First scan to detecte all the open ports
-nmap -p- --min-rate 10000 $ip > firstScan
+nmap -p- --min-rate 1000 $ip > firstScan
 
 while read line
 do
