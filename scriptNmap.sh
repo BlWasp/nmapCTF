@@ -39,6 +39,6 @@ echo $portL
 
 #Fourth scan to scan with default scans only the open ports
 echo "Scanning protocols and versions on openned UDP ports"
-nmap -p $portL -sC -sV $ip
+nmap -p $portL -sU -sC -sV $ip
 
 rm secondScan
