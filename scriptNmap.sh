@@ -3,7 +3,8 @@
 ip="${1}"
 portL=""
 
-#First scan to detecte all the open ports
+#First scan to detecte all the open TCP ports
+echo "Scanning openned TCP ports"
 nmap -p- --min-rate 1000 $ip > firstScan
 
 while read line
@@ -15,7 +16,29 @@ do
 done < firstScan
 echo $portL
 
-#Second scan to scan with default scans only the open ports
+#Second scan to scan with default and version scans only the open ports
+echo "Scanning protocols and versions on openned TCP ports"
 nmap -p $portL -sC -sV $ip
 
 rm firstScan
+
+
+portL=""
+#Third scan to detecte all the UDP open ports
+echo "Scanning openned UDP ports"
+nmap -p- --min-rate 500 -sU $ip > secondScan
+
+while read line
+do
+	if [[ ${line:0:1} =~ [0-9] ]]
+	then
+		portL="${portL}${line%%/*},"
+	fi
+done < secondScan
+echo $portL
+
+#Fourth scan to scan with default scans only the open ports
+echo "Scanning protocols and versions on openned UDP ports"
+nmap -p $portL -sC -sV $ip
+
+rm secondScan
