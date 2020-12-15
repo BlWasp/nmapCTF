@@ -5,7 +5,7 @@ portL=""
 
 #First scan to detecte all the open TCP ports
 echo "Scanning open TCP ports"
-nmap -p- --min-rate 1000 $ip > firstScan
+nmap -p- --min-rate 800 $ip > firstScan
 
 while read line
 do
@@ -26,7 +26,7 @@ rm firstScan
 portL=""
 #Third scan to detecte all the UDP open ports
 echo "Scanning open UDP ports"
-nmap -p- --min-rate 500 -sU $ip > secondScan
+nmap --min-rate 500 -sU $ip > secondScan
 
 while read line
 do
